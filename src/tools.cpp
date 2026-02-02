@@ -22,29 +22,35 @@ void loading_animation() {
     std::cout << std::endl;
 }
 
-void render(int width, int height, const std::vector<std::vector<int>>& grid) {
-    // Top border
-    for (int i = 0; i < width + 2; ++i) {
-        std::cout << WHITE << "_";
-    }
-    std::cout << RESET << "\n";
+#include <ncurses.h>
+#include <vector>
 
-    // Grid content
-    for (int i = 0; i < height; ++i) {
-        std::cout << "|";
-        for (int j = 0; j < width; ++j) {
-            if (grid[i][j] == 0) {
-                std::cout << ".";
-            } else if (grid[i][j] == 1) {
-                std::cout << "#";
-            }
+void render(int width, int height, const std::vector<std::vector<int>>& grid) {
+    
+    clear(); // Clear entire screen
+
+    // Top border
+    for (int x = 0; x < width + 2; x++) {
+        mvaddch(0, x, ACS_HLINE); // or '_' 
+    }
+
+    // Grid content + side borders
+    for (int y = 0; y < height; y++) {
+        mvaddch(y + 1, 0, ACS_VLINE); // left wall
+        for (int x = 0; x < width; x++) {
+            char ch = (grid[y][x] ? '#' : ' ');
+            mvaddch(y + 1, x + 1, ch);
         }
-        std::cout << "|\n";
+        mvaddch(y + 1, width + 1, ACS_VLINE); // right wall
     }
 
     // Bottom border
-    for (int i = 0; i < width + 2; ++i) {
-        std::cout << WHITE << "-";
+    for (int x = 0; x < width + 2; x++) {
+        mvaddch(height + 1, x, ACS_HLINE);
     }
-    std::cout << RESET << "\n";
+
+    // Optional: Add score/info at bottom
+    mvprintw(height + 3, 0, "Controls: A/D = move, Q = quit");
+    
+    refresh(); // Push all changes to screen
 }

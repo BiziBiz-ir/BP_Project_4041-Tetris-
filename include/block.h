@@ -10,7 +10,9 @@ public:
     int rotation;
     std::string shape;
 
-    void rotate();  // Fixed typo: "rotat" → "rotate"
+    void rotate();  
+    void move_right();
+    void move_left();
     Block(int x, int y);
 };
 
