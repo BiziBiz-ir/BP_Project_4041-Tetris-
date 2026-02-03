@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
+  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/block.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/block.cpp",
+  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/block.cpp",
+  "output": "CMakeFiles/tetris.dir/src/block.cpp.o"
+},
+{
+  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
+  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/game.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/game.cpp",
+  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/game.cpp",
+  "output": "CMakeFiles/tetris.dir/src/game.cpp.o"
+},
+{
+  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
+  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/main.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/main.cpp",
+  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/main.cpp",
+  "output": "CMakeFiles/tetris.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
+  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/menu.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/menu.cpp",
+  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/menu.cpp",
+  "output": "CMakeFiles/tetris.dir/src/menu.cpp.o"
+},
+{
+  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
+  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/tools.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/tools.cpp",
+  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/tools.cpp",
+  "output": "CMakeFiles/tetris.dir/src/tools.cpp.o"
+}
+]

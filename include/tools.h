@@ -5,6 +5,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include "block.h"
 
 // ANSI Color Codes (NO using namespace std here!)
 #define RESET   "\033[0m"
@@ -19,7 +20,10 @@
 
 // Utility functions
 void clear_screen();
+void erase_screen();
 void loading_animation();
-void render(int width, int height, const std::vector<std::vector<int>>& grid);
+void render(int width, int height,
+            const std::vector<std::vector<int>>& grid,
+            const Block& current_block);
 
 #endif // TOOLS_H
