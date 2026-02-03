@@ -18,63 +18,70 @@ void game() {
     cbreak();
     noecho();
     keypad(stdscr, true);
-    nodelay(stdscr, true);  // ← this enables real-time input (no Enter)
+    nodelay(stdscr, true);
     curs_set(0);
 
-    Block current_block(width / 2 - 2, 0); // center it (adjust for 4-cell width)
+    Block current_block(width / 2 - 2, 0); 
     bool is_running = true;
+    bool paused = false;
 
-    while (is_running) {
-        // Clear screen (ncurses style)
-        clear();
+while (is_running) {
+    clear();
 
-        // Render grid + active block (you'll update render() next)
-        render(width, height, grid, current_block);
+    // Always render, even when paused
+    render(width, height, grid, current_block);
 
-        // Get key (non-blocking)
-        int ch = getch();
-
-        // Save original position
-        int old_x = current_block.position_x;
-        int old_y = current_block.position_y;
-
-        // Handle input
-        if (ch == 'a' || ch == 'A' || ch == KEY_LEFT) {
-            current_block.move_left();
-        } else if (ch == 'd' || ch == 'D' || ch == KEY_RIGHT) {
-            current_block.move_right();
-        } else if (ch == 's' || ch == 'S' || ch == KEY_DOWN) {
-            current_block.move_down();
-        } else if (ch == 'q' || ch == 'Q') {
-            break; // quit
-        }
-        // Ignore all other keys (including garbage input)
-
-        // Check if new position is inside bounds (0 <= x <= width - 1)
-        // Note: we only check X here because Y < 0 is okay (block entering from top)
-        bool valid_x = true;
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                if (current_block.shape[y][x] == 1) {
-                    int world_x = current_block.position_x   + x;
-                    if (world_x < 0 || world_x >= width) {
-                        valid_x = false;
-                        break;
-                    }
-                }
-            }
-            if (!valid_x) break;
-        }
-
-        // If move caused out-of-bounds, revert
-        if (!valid_x) {
-            current_block.position_x = old_x;
-            current_block.position_y = old_y;
-        }
-
-        // Optional: small delay to control speed
-        usleep(100000); // 100ms → ~10 FPS
+    // Handle input (always active, even when paused)
+    int ch = getch();
+    if (ch == 'p' || ch == 'P') {
+        paused = !paused; // toggle pause
+    } else if (ch == 'q' || ch == 'Q') {
+        break;
     }
+
+    // Only move/fall if NOT paused
+    if (!paused) {
+        // --- Automatic falling ---
+        Block test_block = current_block;
+        test_block.move_down();
+        if (!test_block.is_valid_position(grid, width, height)) {
+            current_block.lock(grid);
+            current_block = Block(width / 2 - 2, 0);
+            if (!current_block.is_valid_position(grid, width, height)) {
+                is_running = false;
+            }
+        } else {
+            current_block.move_down();
+        }
+
+        // --- Player movement (A/D/S) ---
+        if (ch == 'a' || ch == 'A' || ch == KEY_LEFT) {
+            Block test = current_block;
+            test.move_left();
+            if (test.is_valid_position(grid, width, height)) {
+                current_block.move_left();
+            }
+        } else if (ch == 'd' || ch == 'D' || ch == KEY_RIGHT) {
+            Block test = current_block;
+            test.move_right();
+            if (test.is_valid_position(grid, width, height)) {
+                current_block.move_right();
+            }
+        } else if (ch == 's' || ch == 'S' || ch == KEY_DOWN) {
+            Block test = current_block;
+            test.move_down();
+            if (test.is_valid_position(grid, width, height)) {
+                current_block.move_down();
+            }
+        }
+    } else {
+        // Optional: show "PAUSED" message
+        mvprintw(height + 3, 0, "PAUSED - Press P to resume");
+    }
+
+    refresh();
+    usleep(300000);
+}
 
     endwin();
 }
