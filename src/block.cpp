@@ -1,7 +1,7 @@
 #include "block.h"
 #include <vector>
 #include <algorithm>
-
+#include "tools.h"
 void Block::rotate() {
     // Step 1: Transpose the 4x4 matrix
     std::vector<std::vector<int>> new_shape(4, std::vector<int>(4, 0));
@@ -68,8 +68,7 @@ void Block::move_right (){
 
 
 void Block::move_down(){
-    position_y++;
-    
+    position_y++;   
 }
 
 
@@ -113,7 +112,7 @@ void Block::lock(std::vector<std::vector<int>>& grid) const {
 }
 
 
-Block::Block(int x, int y) : position_x(x), position_y(y) {
+Block::Block(int x, int y, int next_shape) : position_x(x), position_y(y) {
 const std::vector<std::vector<std::vector<int>>> SHAPES = {
     // I-piece
     {
@@ -167,6 +166,6 @@ const std::vector<std::vector<std::vector<int>>> SHAPES = {
 };
 
     
-    shape = SHAPES[0]; 
+    shape = SHAPES[next_shape]; 
 }
 

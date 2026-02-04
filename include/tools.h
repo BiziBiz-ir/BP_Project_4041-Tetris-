@@ -7,7 +7,7 @@
 #include <chrono>
 #include "block.h"
 
-// ANSI Color Codes (NO using namespace std here!)
+// ANSI Color Codes
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"
 #define RED     "\033[31m"
@@ -26,4 +26,7 @@ void render(int width, int height,
             const std::vector<std::vector<int>>& grid,
             const Block& current_block);
 int clear_lines(std::vector<std::vector<int>>& grid, int width, int height);
+int random_block();
+char show_the_block(int shape);
+void init_colorss();
 #endif // TOOLS_H

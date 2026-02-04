@@ -5,7 +5,6 @@ tetris: \
   CMakeFiles/tetris.dir/src/block.cpp.o \
   CMakeFiles/tetris.dir/src/game.cpp.o \
   CMakeFiles/tetris.dir/src/main.cpp.o \
-  CMakeFiles/tetris.dir/src/menu.cpp.o \
   CMakeFiles/tetris.dir/src/tools.cpp.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libcurses.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/libcurses.so \
@@ -53,8 +52,6 @@ CMakeFiles/tetris.dir/src/block.cpp.o:
 CMakeFiles/tetris.dir/src/game.cpp.o:
 
 CMakeFiles/tetris.dir/src/main.cpp.o:
-
-CMakeFiles/tetris.dir/src/menu.cpp.o:
 
 CMakeFiles/tetris.dir/src/tools.cpp.o:
 

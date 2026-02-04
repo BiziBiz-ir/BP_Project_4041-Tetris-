@@ -21,28 +21,72 @@ void game() {
     nodelay(stdscr, true);
     curs_set(0);
 
-    Block current_block(width / 2 - 2, 0); 
+    start_color();
+        
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(4, COLOR_BLUE, COLOR_BLACK);
+    init_pair(5, COLOR_CYAN, COLOR_BLACK);
+    init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(7, COLOR_WHITE, COLOR_BLACK);
+
+
+
+    int new_shape = 0;
+
+    Block current_block(width / 2 - 2, 0, random_block()); 
+    int next_block = random_block();
     bool is_running = true;
     bool paused = false;
 
+    int game_speed = 500000;
+
     int score = 0;
     int lines = 0;
+    int level = 1;
 
     const int points [] = {0, 100, 300, 500, 800};
+    const int points_for_level[] = {0, 500 , 1000, 3000, 5000};
+
+    
 
 
 while (is_running) {
+    
     clear();
 
     // Always render, even when paused
     render(width, height, grid, current_block);
+    
+    attron(COLOR_PAIR(5));
+    mvprintw(0, width + 5, " _____ _____ _____ ____  ___ ____  \n");
+    mvprintw(1, width + 5, "|_   _| ____|_   _|  _ ||_ _/ ___| \n");
+    mvprintw(2, width + 5, "  | | |  _|   | | | |_) || ||___ | \n");
+    mvprintw(3, width + 5, "  | | | |___  | | |  _ < | | ___) |\n");
+    mvprintw(4, width + 5, "  |_| |_____| |_| |_| |_|___|____/ \n");
+    attroff(COLOR_PAIR(5));
 
-    mvprintw(0, width + 5, "Score: %d", score);
-    mvprintw(1, width + 5, "Lines: %d", lines);
-    mvprintw(2, width + 5, "Press Q to quit");
+    attron(COLOR_PAIR(2));
+    mvprintw(6, width + 5, "=====================");
+    mvprintw(7, width + 5, "||Score: %d", score);
+    mvprintw(7, width + 24, "||");
+    mvprintw(8, width + 5, "||Lines: %d", lines);
+    mvprintw(8, width + 24, "||");
+    mvprintw(9, width + 5, "||Level: %d" , level);
+    mvprintw(9, width + 24, "||");
+    mvprintw(10, width + 5, "||Next block: %c", show_the_block(next_block));
+    mvprintw(10, width + 24, "||");
+    mvprintw(11, width + 5, "||Press Q to quit");
+    mvprintw(11, width + 24, "||");
+     mvprintw(12, width + 5, "=====================");
+    attroff(COLOR_PAIR(2));
     if (paused) {
-        mvprintw(3, width + 5, "PAUSED");
+        attron(COLOR_PAIR(1));
+        mvprintw(14, width + 5, "PAUSED");
+        attroff(COLOR_PAIR(1));
     }
+    
 
     // Handle input (always active, even when paused)
     int ch = getch();
@@ -54,6 +98,11 @@ while (is_running) {
 
     // Only move/fall if NOT paused
     if (!paused) {
+    // The game speed increases when score is enough
+        if (score >= points_for_level[level+1]) {
+            level++;
+            game_speed-= 100000;
+        }   
         // --- Automatic falling ---
         Block test_block = current_block;
         if (!current_block.is_valid_position(grid, width, height)) {
@@ -68,7 +117,8 @@ while (is_running) {
             lines += cleared;
             score += points[lines];
 
-            current_block = Block(width / 2 - 2, 0);
+            current_block = Block(width / 2 - 2, 0, next_block);
+            next_block = random_block();
             if (!current_block.is_valid_position(grid, width, height)) {
                 is_running = false;
             }
@@ -92,14 +142,10 @@ while (is_running) {
         } else if (ch == 'w' || ch == 'W') {
             current_block.adjust_the_rotation(grid,width,height);
         }
-        
-    } else {
-        // Optional: show "PAUSED" message
-        mvprintw(height + 3, 0, "PAUSED - Press P to resume");
     }
 
     refresh();
-    usleep(500000);
+    usleep(game_speed);
 }
 
     endwin();

@@ -11,7 +11,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/bizibiz/Desktop/BP_Project_4041/src/block.cpp" "CMakeFiles/tetris.dir/src/block.cpp.o" "gcc" "CMakeFiles/tetris.dir/src/block.cpp.o.d"
   "/home/bizibiz/Desktop/BP_Project_4041/src/game.cpp" "CMakeFiles/tetris.dir/src/game.cpp.o" "gcc" "CMakeFiles/tetris.dir/src/game.cpp.o.d"
   "/home/bizibiz/Desktop/BP_Project_4041/src/main.cpp" "CMakeFiles/tetris.dir/src/main.cpp.o" "gcc" "CMakeFiles/tetris.dir/src/main.cpp.o.d"
-  "/home/bizibiz/Desktop/BP_Project_4041/src/menu.cpp" "CMakeFiles/tetris.dir/src/menu.cpp.o" "gcc" "CMakeFiles/tetris.dir/src/menu.cpp.o.d"
   "/home/bizibiz/Desktop/BP_Project_4041/src/tools.cpp" "CMakeFiles/tetris.dir/src/tools.cpp.o" "gcc" "CMakeFiles/tetris.dir/src/tools.cpp.o.d"
   "" "tetris" "gcc" "CMakeFiles/tetris.dir/link.d"
   )

@@ -3,6 +3,21 @@
 #include <unistd.h>  // for usleep
 #include <cstdlib>  // for system()
 #include <algorithm>
+#include <ncurses.h>
+#include <vector>
+#include <random>
+#include <iostream>
+
+void init_colorss() {
+    
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(4, COLOR_BLUE, COLOR_BLACK);
+    init_pair(5, COLOR_CYAN, COLOR_BLACK);
+    init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(7, COLOR_WHITE, COLOR_BLACK);
+}
 
 void clear_screen() {
     std::cout << "\033[2J\033[1;1H" << std::flush;  
@@ -28,20 +43,32 @@ void loading_animation() {
     std::cout << std::endl;
 }
 
-#include <ncurses.h>
-#include <vector>
-
 void render(int width, int height,
             const std::vector<std::vector<int>>& grid,
             const Block& current_block) {
+    //start_color();
+    init_colorss();
     // Draw top border
+    attron(COLOR_PAIR(1));
     mvaddch(0, 0, '+');
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(6));
     for (int i = 0; i < width; i++) mvaddch(0, i + 1, '-');
+    attroff(COLOR_PAIR(6));
+    
+    attron(COLOR_PAIR(1));
     mvaddch(0, width + 1, '+');
+    attroff(COLOR_PAIR(1));
 
     // Draw rows
     for (int y = 0; y < height; y++) {
+        attron(COLOR_PAIR(6));
         mvaddch(y + 1, 0, '|'); // left wall
+        attroff(COLOR_PAIR(6));
+
+        attron(COLOR_PAIR(4));
+
 
         for (int x = 0; x < width; x++) {
             char ch = ' ';
@@ -60,15 +87,26 @@ void render(int width, int height,
             }
 
             mvaddch(y + 1, x + 1, ch);
-        }
+        }attroff(COLOR_PAIR(4));
 
+
+        attron(COLOR_PAIR(6));
         mvaddch(y + 1, width + 1, '|'); // right wall
+        attroff(COLOR_PAIR(6));
     }
 
     // Bottom border
+    attron(COLOR_PAIR(1));
     mvaddch(height + 1, 0, '+');
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(6));
     for (int i = 0; i < width; i++) mvaddch(height + 1, i + 1, '-');
+    attron(COLOR_PAIR(6));
+
+    attron(COLOR_PAIR(1));
     mvaddch(height + 1, width + 1, '+');
+    attron(COLOR_PAIR(1));
 }
 
 int clear_lines(std::vector<std::vector<int>>& grid, int width, int height) {
@@ -102,3 +140,43 @@ int clear_lines(std::vector<std::vector<int>>& grid, int width, int height) {
     grid = new_grid;
     return lines_cleared;
 }
+
+
+int random_block() {
+
+    std::random_device rd;
+
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<int> distribution(0, 6);
+    
+    return distribution(generator);
+}
+char show_the_block(int shape) {
+    switch (shape)
+    {
+    case 0:
+        return 'I';
+        break;
+    case 1:
+        return '0';
+        break;
+    case 2: 
+        return  'T';
+    case 3:
+        return 'S';
+        break;
+    case 4: 
+        return 'Z';
+        break;
+    case 5:
+        return 'J';
+        break;
+    case 6: 
+        return 'L';
+        break;
+    default:
+        break;
+    }
+    return 'N';
+}
+

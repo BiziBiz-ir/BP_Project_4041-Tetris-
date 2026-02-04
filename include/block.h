@@ -20,7 +20,7 @@ public:
     void move_right();
     void move_left();
     void move_down();
-    Block(int x, int y);
+    Block(int x, int y, int next_shape);
 
     bool adjust_the_rotation(std::vector<std::vector<int>>& grid, int width, int height);
 };

@@ -201,30 +201,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/menu.o: src/menu.cpp.o
-.PHONY : src/menu.o
-
-# target to build an object file
-src/menu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/menu.cpp.o
-.PHONY : src/menu.cpp.o
-
-src/menu.i: src/menu.cpp.i
-.PHONY : src/menu.i
-
-# target to preprocess a source file
-src/menu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/menu.cpp.i
-.PHONY : src/menu.cpp.i
-
-src/menu.s: src/menu.cpp.s
-.PHONY : src/menu.s
-
-# target to generate assembly for a file
-src/menu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/menu.cpp.s
-.PHONY : src/menu.cpp.s
-
 src/tools.o: src/tools.cpp.o
 .PHONY : src/tools.o
 
@@ -267,9 +243,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/menu.o"
-	@echo "... src/menu.i"
-	@echo "... src/menu.s"
 	@echo "... src/tools.o"
 	@echo "... src/tools.i"
 	@echo "... src/tools.s"

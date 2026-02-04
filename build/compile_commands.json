@@ -19,12 +19,6 @@
 },
 {
   "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
-  "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/menu.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/menu.cpp",
-  "file": "/home/bizibiz/Desktop/BP_Project_4041/src/menu.cpp",
-  "output": "CMakeFiles/tetris.dir/src/menu.cpp.o"
-},
-{
-  "directory": "/home/bizibiz/Desktop/BP_Project_4041/build",
   "command": "/usr/bin/g++  -I/home/bizibiz/Desktop/BP_Project_4041/include -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/tools.cpp.o -c /home/bizibiz/Desktop/BP_Project_4041/src/tools.cpp",
   "file": "/home/bizibiz/Desktop/BP_Project_4041/src/tools.cpp",
   "output": "CMakeFiles/tetris.dir/src/tools.cpp.o"
