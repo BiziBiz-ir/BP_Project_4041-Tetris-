@@ -2,6 +2,7 @@
 #include "block.h"
 #include <unistd.h>  // for usleep
 #include <cstdlib>  // for system()
+#include <algorithm>
 
 void clear_screen() {
     std::cout << "\033[2J\033[1;1H" << std::flush;  
@@ -68,4 +69,36 @@ void render(int width, int height,
     mvaddch(height + 1, 0, '+');
     for (int i = 0; i < width; i++) mvaddch(height + 1, i + 1, '-');
     mvaddch(height + 1, width + 1, '+');
+}
+
+int clear_lines(std::vector<std::vector<int>>& grid, int width, int height) {
+    std::vector<std::vector<int>> new_grid;
+    int lines_cleared = 0;
+
+    
+    for (int y = height - 1; y >= 0; y--) {
+        bool is_full = true;
+        for (int x = 0; x < width; x++) {
+            if (grid[y][x] == 0) {
+                is_full = false;
+                break;
+            }
+        }
+
+        if (is_full) {
+            lines_cleared++;
+        } else {
+            new_grid.push_back(grid[y]); 
+        }
+    }
+
+    std::reverse(new_grid.begin(), new_grid.end());
+
+
+    while ((int)new_grid.size() < height) {
+        new_grid.insert(new_grid.begin(), std::vector<int>(width, 0));
+    }
+
+    grid = new_grid;
+    return lines_cleared;
 }

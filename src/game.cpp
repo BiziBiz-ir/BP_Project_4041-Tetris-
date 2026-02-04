@@ -25,11 +25,24 @@ void game() {
     bool is_running = true;
     bool paused = false;
 
+    int score = 0;
+    int lines = 0;
+
+    const int points [] = {0, 100, 300, 500, 800};
+
+
 while (is_running) {
     clear();
 
     // Always render, even when paused
     render(width, height, grid, current_block);
+
+    mvprintw(0, width + 5, "Score: %d", score);
+    mvprintw(1, width + 5, "Lines: %d", lines);
+    mvprintw(2, width + 5, "Press Q to quit");
+    if (paused) {
+        mvprintw(3, width + 5, "PAUSED");
+    }
 
     // Handle input (always active, even when paused)
     int ch = getch();
@@ -43,9 +56,18 @@ while (is_running) {
     if (!paused) {
         // --- Automatic falling ---
         Block test_block = current_block;
+        if (!current_block.is_valid_position(grid, width, height)) {
+            is_running = false; // Game Over
+        }   
+
         test_block.move_down();
         if (!test_block.is_valid_position(grid, width, height)) {
             current_block.lock(grid);
+
+            int cleared = clear_lines(grid, width, height);
+            lines += cleared;
+            score += points[lines];
+
             current_block = Block(width / 2 - 2, 0);
             if (!current_block.is_valid_position(grid, width, height)) {
                 is_running = false;
@@ -67,21 +89,25 @@ while (is_running) {
             if (test.is_valid_position(grid, width, height)) {
                 current_block.move_right();
             }
-        } else if (ch == 's' || ch == 'S' || ch == KEY_DOWN) {
-            Block test = current_block;
-            test.move_down();
-            if (test.is_valid_position(grid, width, height)) {
-                current_block.move_down();
-            }
+        } else if (ch == 'w' || ch == 'W') {
+            current_block.adjust_the_rotation(grid,width,height);
         }
+        
     } else {
         // Optional: show "PAUSED" message
         mvprintw(height + 3, 0, "PAUSED - Press P to resume");
     }
 
     refresh();
-    usleep(300000);
+    usleep(500000);
 }
 
     endwin();
+
+
+    std::cout << "\nGAME OVER!\n";
+    std::cout << "Final Score: " << score << "\n";
+    std::cout << "Lines Cleared: " << lines << "\n";
+    std::cout << "Press Enter to exit...\n";
+    std::cin.ignore();
 }

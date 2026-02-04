@@ -21,6 +21,8 @@ public:
     void move_left();
     void move_down();
     Block(int x, int y);
+
+    bool adjust_the_rotation(std::vector<std::vector<int>>& grid, int width, int height);
 };
 
 #endif // BLOCK_H

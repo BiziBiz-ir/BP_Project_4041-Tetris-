@@ -25,5 +25,5 @@ void loading_animation();
 void render(int width, int height,
             const std::vector<std::vector<int>>& grid,
             const Block& current_block);
-
+int clear_lines(std::vector<std::vector<int>>& grid, int width, int height);
 #endif // TOOLS_H
