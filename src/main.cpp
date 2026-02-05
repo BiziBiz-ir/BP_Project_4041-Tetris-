@@ -63,12 +63,15 @@ void run_menu_system() {
 
         switch (input) {
             case 1: 
-                game();
+                game(1);
                 break;
-            case 2: 
-                show_help();
+            case 2:
+                game(2);
                 break;
             case 3: 
+                show_help();
+                break;
+            case 4: 
                 erase_screen();
                 std::cout << YELLOW << "Thanks for playing!\n" << RESET;
                 exitProgram = true;

@@ -29,4 +29,6 @@ int clear_lines(std::vector<std::vector<int>>& grid, int width, int height);
 int random_block();
 char show_the_block(int shape);
 void init_colorss();
+void save(const std::vector<std::vector<int>>& grid,int score, int lines, int level);
+void load(std::vector<std::vector<int>>& grid,int score, int lines, int level);
 #endif // TOOLS_H

@@ -7,6 +7,8 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <string>
+#include <fstream>
 
 void init_colorss() {
     
@@ -180,3 +182,39 @@ char show_the_block(int shape) {
     return 'N';
 }
 
+void save(const std::vector<std::vector<int>>& grid,int score, int lines, int level) {
+    std::ofstream file("saved_game.txt");
+    if (!file.is_open()) std::cout << "Savefailed";
+
+    // Write data row by row
+    for (const auto& row : grid) {
+        for (size_t i = 0; i < row.size(); ++i) {
+            file << row[i];
+            if (i < row.size() - 1) file << " ";
+        }
+        file << "\n";
+    }
+    file.close();
+
+    std::ofstream data("saved_data.txt");
+    data << score << " " << lines << " " << level;
+    data.close();
+}
+
+
+
+void load(std::vector<std::vector<int>>& grid,int score, int lines, int level) {
+    std::ifstream file("saved_game.txt");
+    if (!file.is_open()) std::cout << "Loadfailed";
+
+    for (size_t i = 0; i < 20; ++i) {
+        for (size_t j = 0; j < 10; ++j) {
+            if (!(file >> grid[i][j])) std::cout << "Loadfailed";
+        }
+    }
+
+    file.close();
+
+    std::ifstream data("saved_data.txt");
+    data >> score >> lines >> level;
+}
