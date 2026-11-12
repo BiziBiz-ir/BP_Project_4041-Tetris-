@@ -17,9 +17,10 @@ void show_help() {
     loading_animation();
     erase_screen();
     std::cout << "=== HELP ===\n";
-    std::cout << "Use arrow keys to move\n";
+    std::cout << "Use A/D keys to move\n";
     std::cout << "'w' to rotate\n";
     std::cout << "'Space' to drop instantly\n";
+    std::cout << "'s' To save the game\n";
     std::cout << "\nPress any key to return to menu...";
     
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -41,9 +42,10 @@ void run_menu_system() {
                   << RESET << "\n\n";
         
         std::cout << RED 
-                  << "1) PLAY THE GAME\n"
-                     "2) HELP\n"
-                     "3) EXIT\n"
+                  << "1) PLAY NEW GAME\n"
+                     "2) LOAD GAME\n"
+                     "3) HELP\n"
+                     "4) EXIT\n"
                   << RESET << "\n";
 
         int input;
@@ -51,7 +53,7 @@ void run_menu_system() {
             std::cout << CYAN << "Please enter the number: " << RESET;
             std::cin >> input;
             
-            if (std::cin.fail() || input < 1 || input > 3) {
+            if (std::cin.fail() || input < 1 || input > 4) {
                 erase_screen();
                 std::cout << RED << "INVALID INPUT\n" << RESET;
                 std::cin.clear();

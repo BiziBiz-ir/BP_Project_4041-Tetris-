@@ -14,5 +14,5 @@ It has the basic featurs of Tetris and also:
 ● Saving the game + best score of all time
 ● Colorful UI + ASCII Art
 ● Showing the next Piece
-● Game speed increases with the level
+● Game speed increases with each level
 
