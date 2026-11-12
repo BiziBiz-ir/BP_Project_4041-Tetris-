@@ -1,0 +1,29 @@
+# ---- CMake / build output ----
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile
+*.cmake.tmp
+
+# ---- Compiled objects and binaries ----
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+tetris
+alsa_test
+
+# ---- Runtime files written by the game ----
+best.txt
+saved_game.txt
+saved_data.txt
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+*.swp
+.DS_Store

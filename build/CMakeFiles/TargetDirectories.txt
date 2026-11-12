@@ -1,3 +1,0 @@
-/home/bizibiz/Desktop/BP_Project_4041/build/CMakeFiles/tetris.dir
-/home/bizibiz/Desktop/BP_Project_4041/build/CMakeFiles/edit_cache.dir
-/home/bizibiz/Desktop/BP_Project_4041/build/CMakeFiles/rebuild_cache.dir
